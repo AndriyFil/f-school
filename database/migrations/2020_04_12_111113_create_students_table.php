@@ -13,20 +13,20 @@ class CreateStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('students', function (Blueprint $table) {
-            $table->integer('stu_id')->autoIncrement();
-            $table->string('stu_ticket')->index();
-            $table->string('stu_firstname');
-            $table->string('stu_secondname');
-            $table->string('stu_middlename');
-            $table->integer('stu_class_number_id');
-            $table->foreign('stu_class_number_id')
-                ->references('cla_id')
-                ->on('classes')
-                ->onUpdate('cascade');
-            $table->string('stu_class_letter');
-            $table->timestamp('stu_created')->useCurrent();
-            $table->timestamp('stu_updated')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
+        Schema::create('schoolboys', function (Blueprint $table) {
+            $table->integer('schboy_id')->autoIncrement();
+            $table->string('schboy_ticket')->index();
+            $table->string('schboy_firstname')->nullable();
+            $table->string('schboy_secondname')->nullable();
+            $table->string('schboy_middlename')->nullable();
+            $table->string('schboy_email')->unique();
+            $table->string('schboy_phone_number')->nullable();
+            $table->integer('schboy_class_number')->nullable()->index();
+            $table->string('schboy_class_letter')->nullable()->index();
+            $table->integer('schboy_user_id')->index();
+            $table->integer('schboy_school_id')->index();
+            $table->timestamp('schboy_created')->useCurrent();
+            $table->timestamp('schboy_updated')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
         });
     }
 

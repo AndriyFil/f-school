@@ -15,32 +15,14 @@ class CreateJournalTable extends Migration
     {
         Schema::create('journals', function (Blueprint $table) {
             $table->integer('jou_record')->autoIncrement();
-            $table->integer('jou_student_id');
-            $table->integer('jou_subject_id');
-            $table->integer('jou_rating_type_id');
-            $table->integer('jou_teacher_id');
-            
-            $table->foreign('jou_student_id')
-                ->references('stu_id')
-                ->on('students')
-                ->onUpdate('cascade');
-            
-            $table->foreign('jou_teacher_id')
-                ->references('tea_id')
-                ->on('teachers')
-                ->onUpdate('cascade');
-            
-            $table->foreign('jou_subject_id')
-                ->references('sub_id')
-                ->on('subjects')
-                ->onUpdate('cascade');
-            
-            $table->foreign('jou_rating_type_id')
-                ->references('rattyp_id')
-                ->on('rating_types')
-                ->onUpdate('cascade');
-            $table->timestamp('jou_created');
-            $table->timestamp('jou_updated');
+            $table->integer('jou_schoolboy_id')->index();
+            $table->integer('jou_subject_id')->index();
+            $table->integer('jou_teacher_id')->index();
+            $table->integer('jou_rating');
+            $table->integer('jou_rating_type_id')->index();
+            $table->integer('jou_school_id')->index();
+            $table->timestamp('jou_created')->useCurrent();
+            $table->timestamp('jou_updated')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
         });
     }
 

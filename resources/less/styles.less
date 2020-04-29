@@ -1,0 +1,226 @@
+*, *::after, *::before {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+body{
+    padding: 0px;
+    margin: 0px;
+    background-color: white;
+    height: 100vh;
+}
+html ,body{
+    .less-font-regular;
+    font-size: @font-size-base;
+    color: @color-text-normal;
+    line-height: normal;
+    width: 100%;
+    min-height: 100%;
+    text-rendering: optimizeLegibility;
+}
+table, p{
+    padding: 0px;
+    margin: 0px;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+table td,
+table th{
+    padding: 0;
+    vertical-align: top;
+}
+tbody,
+tbody th,
+thead th{
+    border: none;
+}
+form, dl, dd, dt{
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+}
+ul, ol{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+a{
+    color: @color-text-normal;
+    text-decoration: underline;
+}
+a:hover{
+}
+a:focus{
+    outline: none;
+}
+strong{
+    .less-font-bold;
+}
+i,em{
+    .less-font-italic;
+}
+h1, h2, h3, h4, h5, h6{
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+    font-size: 1em;
+    font-weight: normal;
+}
+h1, h1 a, h1 a:hover,
+h2, h2 a, h2 a:hover,
+h3, h3 a, h3 a:hover,
+h4, h4 a, h4 a:hover,
+h5, h5 a, h5 a:hover,
+h6, h6 a, h6 a:hover{
+    text-decoration: none;
+}
+input, select, textarea, button{
+    max-width: 100%;
+    .less-font-regular;
+    font-size: @font-size-base;
+    color: @color-text-normal;
+    line-height: normal;
+    outline: none;
+}
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+}
+select::-ms-expand{
+    display: none;
+}
+img{
+    //width: 100%;
+    //height: auto;
+    //max-width: 100%;
+    //max-height: 100%;
+    //display: block;
+    border: 0px;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+object{
+    pointer-events: none;//click to icon .. fix
+}
+
+.header {
+    box-shadow: 0 4px 3px #ddd;
+    height: 500px;
+    background: #5e79ff;
+    color: @color-w;
+    //background: #fffff5;
+    border-bottom-left-radius: 30%;
+    border-bottom-right-radius: 30%;
+    padding: 0 30px;
+    .header-items {
+        .display(flex);
+        .flex-direction(column);
+        .justify-content(center);
+        .align-items(center);
+        height: 100%;
+        .block-title {
+            .main-title {
+                text-align: center;
+                margin-bottom: 10px;
+                font-weight: 100;
+                font-size: @font-size-ultra;
+            }
+            .subtitle {
+                font-size: @font-size-larger;
+                text-align: center;
+            }
+        }
+        .block-btn {
+            margin-top: 30px;
+            button {
+                margin: 5px;
+                border: 1px solid @color-w;
+                color: white;
+            }
+        }
+    }
+    .v-input--selection-controls {
+        margin: 0 !important;
+    }
+}
+.v-input--selection-controls {
+    margin: 0 !important;
+}
+.content-welcome {
+    width: 100%;
+    height: 100%;
+    margin-top: 40px;
+    .display(flex);
+    .align-items(center);
+    justify-content: center;
+    //padding-bottom: 140px;
+    .title-block {
+        font-size: @font-size-biggest;
+        text-align: center;
+        margin-bottom: 10px;
+        margin-top: 40px;
+        font-weight: 100;
+    }
+    .for-users-block {
+        .card-block {
+            .display(flex);
+            .align-items(stretch);
+            .justify-content(center);
+            .card {
+                padding: 20px;
+                margin: 20px;
+                width: 300px;
+                box-shadow: 0 4px 3px #ddd;
+                background: @color-w;
+                .image-block {
+                    .display(flex);
+                    .align-items(center);
+                    .justify-content(center);
+
+                    img {
+                        width: 110px;
+                        border-radius: 50%;
+                    }
+                }
+
+                .text-wrap {
+                    margin-top: 10px;
+
+                    .card-title {
+                        margin-bottom: 10px;
+                        text-align: center;
+                        font-size: @font-size-large;
+                    }
+
+                    .card-text {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.footer-welcome {
+    border: 1px solid  #ddd !important;
+    background: #5e79ff !important;
+    width: 100%;
+    text-align: center;
+    * {
+        color: white;
+    }
+}
+
+.user-content {
+    padding: 30px 40px;
+}

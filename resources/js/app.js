@@ -7,6 +7,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import vuetify from "./vuetify";
+import router from "./router";
 
 /**
  * The following block of code may be used to automatically register your
@@ -18,15 +20,29 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+// import FlashMessage from "@smartweb/vue-flash-message";
+// Vue.use(FlashMessage);
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+import App from "./components/App";
+import Welcome from "./components/Welcome";
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-const app = new Vue({
-    el: '#app',
+import * as auth from './services/auth_service.js'
+var route;
+if(!auth.isLoggedIn()) {
+    route = h => h(Welcome);
+} else {
+    route = h => h(App);
+}
+new Vue({
+    el: '#app'
+    , render: route
+    , router
+    , vuetify
+    // , components: {
+    //    'welcome-footer': Footer
+    //     , 'welcome-header': Header
+    //     , 'welcome-content': Content
+    //     , 'user-navbar': Navbar
+    //
+    // }
 });

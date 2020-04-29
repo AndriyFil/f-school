@@ -17,8 +17,6 @@ class CreateSubjectTeachersTable extends Migration
             $table->integer('subtea_teacher_id');
             $table->integer('subtea_subject_id');
             $table->primary(['subtea_teacher_id', 'subtea_subject_id']);
-            $table->timestamp('subtea_created')->useCurrent();
-            $table->timestamp('subtea_updated')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
         });
     }
 
