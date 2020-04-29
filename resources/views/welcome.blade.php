@@ -8,7 +8,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
+        <link href="{{ asset('css/app.css')  }}" rel="stylesheet">
+        <script src="{{ asset('js/app.js')  }}" defer></script>
         <!-- Styles -->
         <style>
             html, body {
@@ -95,6 +96,7 @@
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
+            <div id="app"></div>
         </div>
     </body>
 </html>
