@@ -1,5 +1,6 @@
 import * as http from './http_service.js'
 import jwt from 'jsonwebtoken';
+import store from '../store'
 
 export function register(user) {
     return http.http().post('/auth/register', user);
@@ -10,7 +11,6 @@ export function login(user) {
             if(response.status === 200) {
                 setToken(response.data)
             }
-
             return response.data
         })
 }
@@ -22,6 +22,7 @@ export function logout() {
 function setToken(user) {
     const token = jwt.sign({user:user}, 'shhhhhhhhhhh')
     localStorage.setItem('larave-vue-token', token);
+    store.dispatch('authenticate', user.user);
 }
 
 export function getAccessToken() {
@@ -36,4 +37,8 @@ export function getAccessToken() {
 export function isLoggedIn() {
     const token = localStorage.getItem('larave-vue-token');
     return token != null;
+}
+
+export function getProfile() {
+    return http.http().get('/auth/profile')
 }

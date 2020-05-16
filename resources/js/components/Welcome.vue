@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div data-app>
         <welcome-header></welcome-header>
         <welcome-content></welcome-content>
         <welcome-footer></welcome-footer>

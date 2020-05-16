@@ -9,6 +9,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 import vuetify from "./vuetify";
 import router from "./router";
+import calendar from "./calendar";
 
 /**
  * The following block of code may be used to automatically register your
@@ -25,24 +26,29 @@ import router from "./router";
 
 import App from "./components/App";
 import Welcome from "./components/Welcome";
+import store from "./store";
 
 import * as auth from './services/auth_service.js'
 var route;
+// if(!auth.isLoggedIn()) {
+//     route = h => h(Welcome);
+// } else {
+//     route = h => h(App);
+// }
+
 if(!auth.isLoggedIn()) {
-    route = h => h(Welcome);
+    route = Welcome;
 } else {
-    route = h => h(App);
+    route = App;
 }
 new Vue({
     el: '#app'
-    , render: route
     , router
     , vuetify
-    // , components: {
-    //    'welcome-footer': Footer
-    //     , 'welcome-header': Header
-    //     , 'welcome-content': Content
-    //     , 'user-navbar': Navbar
-    //
-    // }
+    , store
+    , calendar
+    // , render: route
+    , components: {
+        'content-app': route
+    }
 });

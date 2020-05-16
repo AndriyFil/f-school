@@ -1,6 +1,12 @@
 <template>
     <div>
         <div class="header">
+            <v-progress-linear
+                :active="active_progress"
+                :indeterminate="true"
+                absolute
+                color="white"
+            ></v-progress-linear>
             <div class="header-items">
                 <div class="block-title">
                     <div class="main-title">My School</div>
@@ -68,11 +74,10 @@
                                             <small>*обов'язкові поля для заповнення</small>
                                         </v-col>
                                         <v-col cols="12 text-sm-center">
-                                            <v-btn color="blue darken-1" outlined rounded @click="register()">Зареєструвати</v-btn>
+                                            <v-btn color="blue darken-1" outlined rounded @click="register()" :loading="active_progress" :disabled="active_progress">Зареєструвати</v-btn>
                                         </v-col>
                                     </v-row>
                                 </v-container>
-
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
@@ -116,7 +121,7 @@
                                                 ></v-checkbox>
                                             </div>
                                             <v-col cols="12 text-sm-center">
-                                                <v-btn color="blue darken-1" outlined rounded @click="login()">Увійти</v-btn>
+                                                <v-btn color="blue darken-1" outlined rounded @click="login()" :loading="active_progress" :disabled="active_progress">Увійти</v-btn>
                                             </v-col>
                                         </v-col>
                                     </v-row>
@@ -124,12 +129,30 @@
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="blue darken-1" text @click="login_popup = false">Закрити</v-btn>
+                                <v-btn color="blue darken-1"
+                                       text
+                                       @click="login_popup = false"
+                                       >Закрити
+                                </v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-form>
                 </v-dialog>
             </v-row>
+            <v-snackbar
+                v-model="snackbar"
+                color="info"
+                top
+            >
+                Пароль відправлено на пошту: <u> {{ register_data.email }}</u>
+                <v-btn
+                    dark
+                    text
+                    @click="snackbar = false"
+                >
+                    Close
+                </v-btn>
+            </v-snackbar>
         </div>
     </div>
 </template>
@@ -141,7 +164,8 @@
             register_popup: false,
             login_popup: false,
             valid: true,
-
+            active_progress: false,
+            snackbar: false,
             show_pass: false,
             notification: false,
 
@@ -203,74 +227,27 @@
             async register () {
                 this.validate()
                 try {
+                    this.active_progress = true;
                     await auth.register(this.register_data)
+                    this.active_progress = false;
+                    this.register_popup = false;
+                    this.login_popup = true;
+                    this.snackbar = true;
+                    this.login_data.email_login = this.register_data.email;
                 } catch (error) {
-                    switch (error.response.status) {
-                        case 422:
-                            this.errors = error.response.data.errors;
-                            console.dir( this.errors)
-                            break;
-                        case 500:
-                            alert(error.response.data.message)
-                            break;
-                        default:
-                            alert('Some error')
-                    }
+                    this.active_progress = false;
                 }
             },
             async login () {
                 try {
+                    this.active_progress = true;
                     const response = await auth.login(this.login_data)
                     location.reload();
+                    this.active_progress = false;
                 } catch (error) {
-                    switch (error.response.status) {
-                        case 422:
-                            this.errors = error.response.data.errors;
-                            console.dir( this.errors)
-                            break;
-                        case 500:
-                            alert(error.response.data.message)
-                            break;
-                        default:
-                            alert('Some error')
-                    }
+                        this.active_progress = false;
                 }
             }
-            // , async schoolRegistration () {
-            //     this.cities = await request('/api/get_cities/'+this.region)
-            // }
-            // , async register() {
-            //     this.validate ()
-            //     let status = await request('/api/register/', 'POST', {
-            //         school_name:this.school_name
-            //         , email:this.email
-            //         , firstname:this.firstname
-            //         , lastname:this.lastname
-            //         , middlename:this.middlename
-            //         , city:this.city
-            //         , region:this.region
-            //         , phone_number:this.phone_number
-            //     })
-            //     if (status) {
-            //         this.register_popup = false;
-            //         this.login_popup = true;
-            //         this.email_login = this.email;
-            //         this.notification = true;
-            //     } else {
-            //         alert("Помилка реєстрації")
-            //     }
-            // }
-            // , async login() {
-            //     //this.validate ()
-            //     let status = await request('/api/login/', 'POST', {
-            //         email:this.email_login
-            //         , password:this.password
-            //     })
-            //     console.dir(status)
-            //     // if (status.error) {
-            //     //     this.status_login = false
-            //     // }
-            // }
         },
         async mounted() {
             this.regions = await request('/api/get_regions')

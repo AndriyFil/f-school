@@ -15,11 +15,11 @@ class CreateParentsTable extends Migration
     {
         Schema::create('parents', function (Blueprint $table) {
             $table->integer('par_id')->autoIncrement();
-            $table->string('par_firstname')->nullable();
-            $table->string('par_secondname')->nullable();
-            $table->string('par_middlename')->nullable();
-            $table->string('par_phone_number')->nullable();
-            $table->string('par_email')->unique();
+//            $table->string('par_firstname')->nullable();
+//            $table->string('par_secondname')->nullable();
+//            $table->string('par_middlename')->nullable();
+//            $table->string('par_phone_number')->nullable();
+//            $table->string('par_email')->unique();
             $table->string('par_user_id')->index();
             $table->timestamp('par_created')->useCurrent();
             $table->timestamp('par_updated')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();

@@ -4,26 +4,23 @@ import VueRouter from 'vue-router';
 // const bar = {template:"<v-alert type='error'>I'm Bar component</v-alert>"}
 // const user = {template:"<v-alert type='info'>I'm {{$route.params.name}} component</v-alert>"}
 
-import Welcome from "./components/Welcome";
+import Journal from "./components/user/Journal";
 import * as auth from './services/auth_service.js'
+import Welcome from "./components/Welcome";
+import App from "./components/App";
 Vue.use(VueRouter)
-const routes = [
-    {
-        path: '/'
-        , component: Welcome
-        , name: 'welcome'
-
+var routes = [];
+if(!auth.isLoggedIn()) {
+    routes = []
+    } else {
+        routes = [
+            {
+                path: '/journal'
+                , component: Journal
+                , name: 'journal'
+            }
+        ]
     }
-    // , {
-    //     path: '/bar'
-    //     , component: bar
-    // }
-    // , {
-    //     path: '/user/:name'
-    //      , component: user
-    // }
-]
-
 export default new VueRouter({
     mode: 'history'
     , routes

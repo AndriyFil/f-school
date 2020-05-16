@@ -3,20 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Redirect,Response,DB,Config;
-use Mail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 class EmailController extends Controller
 {
-    public function sendEmail($email, $text)
+    public function sendEmail($email = "filonenkoandriysarmat@gmail.com", $text = "AAA")
     {
         $data['title'] = "Ваш пароль: ";
-        $data['password'] = $text;
+        $data['text'] = $text;
 
         Mail::send('emails.email', $data, function($message) {
 
-            $message->to('filonenkoandriysarmat@gmail.com', 'Receiver Name')
+            $message->to('filonenkoandriysarmat@gmail.com', 'AAAA')
 
-                ->subject('Вітаємо з реєстрацією в My School');
+                ->subject('Вітаємо з реєстрацією в School');
         });
 
         if (Mail::failures()) {

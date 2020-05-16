@@ -1,6 +1,6 @@
 <template>
 
-            <div class="content-welcome">
+            <div class="content-welcome" data-app>
                 <div class="for-users-block">
                     <div class="title-block">
                         Для користування

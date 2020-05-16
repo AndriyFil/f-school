@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('email')
     <h4>{{ $title }} </h4>
-    <h3><b>{{ $password }}</b></h3>
+    <h3><b>{{ $text }}</b></h3>
 @endsection

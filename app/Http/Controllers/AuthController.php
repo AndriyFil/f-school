@@ -15,71 +15,68 @@
     use App\Http\Controllers\EmailController as Email;
     use Illuminate\Support\Facades\Hash;
     use Illuminate\Support\Str;
-
+    use Illuminate\Support\Facades\DB;
 	class AuthController
 	{
         public $successStatus = 200;
-
+        private $role_admin = "admin";
+        private $role_teacher = "teacher";
+        private $role_parent = "parent";
+        private $role_schoolboy = "schoolboy";
+        private $photo_path =  "img/user/elon-musk.png";
         public function register(Request $request) {
-//            $validator = Validator::make($request->all(), [
-//                'email' => 'required|email|unique:users'
-//                , 'phone_number'
-//                , 'firstname' => 'required'
-//                , 'lastname' => 'required'
-//                , 'middlename'
-//                , 'school_name' => 'required'
-//                , 'city' => 'required'
-//                , 'region' => 'required'
-//            ]);
-
             $request->validate([
                 'email' => 'required|email|unique:users'
-                , 'password'
+                , 'phone_number'
+                , 'firstname' => 'required'
+                , 'lastname' => 'required'
+                , 'middlename'
+                , 'school_name' => 'required'
+                , 'city' => 'required'
+                , 'region' => 'required'
             ]);
 
-            $user = new User();
-            $user->email = $request->email;
-            $user->password = bcrypt(1);
-            if($user->save()) {
-                return response()->json([
-                    'message' => 'User created'
-                    , 'status_code' => 201
-                ], 201);
-            } else {
+            DB::beginTransaction();
+            try {
+                $school = new School;
+                $school->sch_name = $request->school_name;
+                $school->sch_city = $request->city;
+                $school->sch_region = $request->region;
+                $school->save();
+                $user = new User();
+                $password = Str::random(8);
+                $user->email = $request->email;
+                $user->phone_number = $request->phone_number;
+                $user->firstname = $request->firstname;
+                $user->lastname = $request->lastname;
+                $user->middlename = $request->middlename;
+                $user->photo = $this->photo_path;
+                $user->school_id = $school->sch_id;
+                $user->password = bcrypt($password);
+                $user->save();
+                $school = new School;
+                $school->sch_name = $request->school_name;
+                $school->sch_city = $request->city;
+                $school->sch_region = $request->region;
+                $school->save();
+                $admin = new Administration;
+                $admin->adm_user_id = $user->id;
+                $admin->adm_type_id = '1';
+                $admin->save();
+                $email = new Email;
+                $email->sendEmail($request->email, $password);
+                DB::commit();
+            } catch (Exception $e) {
+                DB::rollback();
                 return response()->json([
                     'message' => 'Some error occurred'
                     , 'status_code' => 500
                 ], 500);
             }
-//            try {
-//                $password = Str::random(8);
-//                $input['email'] = $request->email;
-//                $input['password'] = bcrypt($password);
-//                $user = User::create($input);
-//
-//                //$oClient = OClient::where('password_client', 1)->first();
-//                //$this->getTokenAndRefreshToken($oClient, $user->email, $password);
-//                $school = new School;
-//                $school->sch_name = $request->school_name;
-//                $school->sch_city = $request->city;
-//                $school->sch_region = $request->region;
-//                $school->save();
-//                $admin = new Administration;
-//                $admin->adm_firstname = $request->firstname;
-//                $admin->adm_lastname = $request->lastname;
-//                $admin->adm_middlename = $request->middlename;
-//                $admin->adm_phone_number = $request->phone_number;
-//                $admin->adm_email = $request->email;
-//                $admin->adm_user_id = $user->id;
-//                $admin->adm_type_id = '1';
-//                $admin->adm_school_id = $school->id;
-//                $admin->save();
-//                $email = new Email;
-//                $email->sendEmail($request->email, $password);
-//            } catch (Exception $e) {
-//                return response()->json(false);
-//            }
-//            return response()->json(true);
+            return response()->json([
+                'message' => 'User created'
+                , 'status_code' => 201
+            ], 201);
         }
 
         public function login(Request $request)
@@ -125,5 +122,17 @@
                 'message' => 'Logout successfully'
                 , 'status_code' => 200
             ], 200);
+        }
+
+        public function profile () {
+            $user = Auth::user();
+            if($user) {
+                return response()->json($user, 200);
+            }
+
+            return response()->json([
+                'message' => 'Not logged in'
+                , 'status_code' => 500
+            ], 500);
         }
 	}

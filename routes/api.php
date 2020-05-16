@@ -37,6 +37,8 @@ use Illuminate\Support\Facades\Route;
 
         Route::group(['middleware' => 'auth:api'], function() {
             Route::post('logout', 'AuthController@logout');
+            Route::get('profile', 'AuthController@profile');
+
         });
     });
 
@@ -56,4 +58,11 @@ use Illuminate\Support\Facades\Route;
             })->middleware('scope:do_anything, can_create');
          });
    });
+
+//    Route::group(['middleware' => 'auth:api'], function() {
+        Route::get('subjects_classes/{id}/{school_id}/{role}', 'JournalController@getSubjectsClasses');
+        Route::get('sections/{subject_id}/{class_number}/{school_id}', 'JournalController@getThemes');
+        Route::post('schoolboys', 'JournalController@getSchoolboys');
+//    });
+//    Route::get('classes', 'JournalController@getClasses');
 

@@ -10,19 +10,20 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <link href="{{ asset('css/app.css')  }}" rel="stylesheet">
-    <link href="{{ asset('css/styles.css')  }}" rel="stylesheet">
+
     <script src="{{ asset('js/app.js')  }}" defer></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <link href="{{ asset('css/app.css')  }}" rel="stylesheet">
+    <link href="{{ asset('css/styles.css')  }}" rel="stylesheet">
+
 </head>
 <body>
-<div class="main">
-    <v-app id="app" data-app>
-
+    <v-app id="app" data-app="true">
+        <content-app></content-app>
 {{--        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">--}}
 {{--            <div class="container">--}}
 {{--                <a class="navbar-brand" href="{{ url('/') }}">--}}
@@ -70,11 +71,10 @@
 {{--            </div>--}}
 {{--        </nav>--}}
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-
+{{--        <main class="py-4">--}}
+{{--            @yield('content')--}}
+{{--        </main>--}}
+        @yield('email')
     </v-app>
-</div>
 </body>
 </html>

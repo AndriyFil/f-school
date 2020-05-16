@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div data-app>
         <v-footer
         :padless="padless"
         :absolute = true
