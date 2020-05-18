@@ -62,7 +62,8 @@ use Illuminate\Support\Facades\Route;
 //    Route::group(['middleware' => 'auth:api'], function() {
         Route::get('subjects_classes/{id}/{school_id}/{role}', 'JournalController@getSubjectsClasses');
         Route::get('sections/{subject_id}/{class_number}/{school_id}', 'JournalController@getThemes');
-        Route::post('schoolboys', 'JournalController@getSchoolboys');
+        Route::post('/schoolboys', 'JournalController@getSchoolboys');
+        Route::post('/set_rating', 'JournalController@setRating');
 //    });
 //    Route::get('classes', 'JournalController@getClasses');
 

@@ -115,7 +115,7 @@ object{
 .header {
     box-shadow: 0 4px 3px #ddd;
     height: 500px;
-    background: #7CA0F1;
+    background: #42A5F5;
     color: @color-w;
     //background: #fffff5;
     border-bottom-left-radius: 30%;
@@ -212,7 +212,7 @@ object{
 
 .footer-welcome {
     border: 1px solid  #ddd !important;
-    background: #7CA0F1 !important;
+    background: #42A5F5 !important;
     width: 100%;
     text-align: center;
     * {
@@ -220,12 +220,13 @@ object{
     }
 }
 .journal-table {
+    width: 100%;
     table {
         border: 1px solid #bbb;
     }
     thead td {
         font-size: 16px;
-        background: #7CA0F1;
+        background: #42A5F5;
         color: @color-w;
 
     }
@@ -236,6 +237,10 @@ object{
         border: 1px solid #eee;
         padding: 10px;
         vertical-align: middle;
+    }
+
+    .lesson-btn {
+        cursor: pointer;
     }
 
     .schoolboy {
@@ -258,10 +263,10 @@ object{
     padding: 30px 40px;
 }
 .input-rating {
-    border: 1px solid #2E2E2E;
-    border-radius: 50%;
+    border: 2px solid #7CAFFF;
+    border-radius: 5px;
     width: 45px;
-    padding: 10px 10px;
+    padding: 5px 10px;
     text-align: center;
     margin-left: 4px;
     margin-right: 4px;
@@ -282,7 +287,12 @@ object{
     }
 
     &:focus {
-        box-shadow: 0 0px 3px #3D73F1;
-        border: 1px solid #3D73F1;
+        box-shadow: 0 0px 3px #42A5F5;
+        border: 2px solid #42A5F5;
     }
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
 }

@@ -1,7 +1,7 @@
 <template>
     <div data-app>
         <v-app-bar
-            color="#7CA0F1"
+            color="#42A5F5"
             src=''
         >
             <v-app-bar-nav-icon color="white" @click="drawer_menu = true"></v-app-bar-nav-icon>

@@ -5,6 +5,7 @@ import VueRouter from 'vue-router';
 // const user = {template:"<v-alert type='info'>I'm {{$route.params.name}} component</v-alert>"}
 
 import Journal from "./components/user/Journal";
+import Lesson from "./components/user/Lesson";
 import * as auth from './services/auth_service.js'
 import Welcome from "./components/Welcome";
 import App from "./components/App";
@@ -18,6 +19,11 @@ if(!auth.isLoggedIn()) {
                 path: '/journal'
                 , component: Journal
                 , name: 'journal'
+            }
+            , {
+                path: '/journal/lesson'
+                , component: Lesson
+                , name: 'lesson'
             }
         ]
     }

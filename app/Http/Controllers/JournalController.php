@@ -97,9 +97,8 @@
             while(end($date_arr) != $date_end) {
                 $date = new \DateTime(end($date_arr));
                 $date = $date->modify('+1 day');
-                $date = $date->format('Y-m-d');
+                $date = date_format($date,'Y-m-d');
                 $date_arr[] = $date;
-
             }
 
             //TODO: change hardcoded type_id, school_id. Change photo query -> (SELECT photo FROM users WHERE users.id = sch.schboy_user_id)
@@ -117,7 +116,9 @@
                     , jou_subject_id 'subject_id'
                     , jou_created 'date'
                     , jou_theme_id 'theme_id'
-                    , schboy_user_id 'schoolboy_id'
+                    , jou_rating_type_id 'rating_type_id'
+                    , (SELECT rattyp_name FROM rating_types WHERE  rattyp_id = jou_rating_type_id) 'rating_type_name'
+                    , schboy_id 'schoolboy_id'
                     , schboy_photo 'photo'
                     , jou_record 'record'
                     , IFNULL((SELECT ROUND(AVG(journals.jou_rating), 1)
@@ -136,6 +137,7 @@
                     AND (j.jou_created >= '$date_start' AND j.jou_created <= '$date_end')
                     $where
                     AND jou_rating_type_id IN (1, 2)
+
                 ORDER BY  sch.schboy_lastname, jou_created
             ");
             $journal_data = [];
@@ -164,9 +166,11 @@
                         }
                         $journal_data[$sch->schoolboy_id]['rating'][$date][$sch->record]['rating'] = $sch->rating;
                         $journal_data[$sch->schoolboy_id]['rating'][$date][$sch->record]['status'] = $status;
+                        $journal_data[$sch->schoolboy_id]['rating'][$date][$sch->record]['rating_type_id'] = $sch->rating_type_id;
+                        $journal_data[$sch->schoolboy_id]['rating'][$date][$sch->record]['rating_type_name'] = $sch->rating_type_name;
+                        $journal_data[$sch->schoolboy_id]['rating'][$date][$sch->record]['input_id'] = "rating_$sch->record";
                     } else {
                         $journal_data[$sch->schoolboy_id]['rating'][$date][$sch->record]['rating'] = "";
-                        $journal_data[$sch->schoolboy_id]['rating'][$date][$sch->record]['status'] = "";
                     }
                 }
             }
@@ -262,44 +266,53 @@
             $request->validate([
                 'rating' => 'required'
                 , 'rating_type' => 'required'
-                , 'date' => 'required'
                 , 'teacher' => 'required'
                 , 'subject' => 'required'
                 , 'theme' => 'required'
                 , 'schoolboy' => 'required'
                 , 'school_id' => 'required'
                 , 'record'
+                , 'class_number'
             ]);
-
+//dd($request);
             $journal = new Journal;
 
+            if (empty($request->record)) {
+                try {
+                    DB::insert("INSERT INTO journals SET
+                            jou_schoolboy_id = '$request->schoolboy'
+                            , jou_teacher_id = '$request->teacher'
+                            , jou_subject_id = '$request->subject'
+                            , jou_rating = '$request->rating'
+                            , jou_rating_type_id = '$request->rating_type'
+                            , jou_school_id = '$request->school_id'
+                            , jou_theme_id = '$request->theme'
+                            , jou_class_number = '$request->class_number'
+                         ");
+                    return response()->json(['status' => true], 200);
+                } catch (Exception $e) {
+                    return response()->json(['status' => false], 500);
+                }
+            } else {
+                try {
+                    DB::update("UPDATE journals SET
+                            jou_schoolboy_id = '$request->schoolboy'
+                            , jou_teacher_id = '$request->teacher'
+                            , jou_subject_id = '$request->subject'
+                            , jou_rating = '$request->rating'
+                            , jou_rating_type_id = '$request->rating_type'
+                            , jou_school_id = '$request->school_id'
+                            , jou_theme_id = '$request->theme'
+                            , jou_class_number = '$request->class_number'
+                        WHERE jou_record = '$request->record'
 
+                     ");
+                    return response()->json(['status' => true], 200);
+                } catch (Exception $e) {
+                    return response()->json(['status' => false], 500);
+                }
+            }
         }
-
-//        public function getClasses() {
-//            dd($this->teach_id);
-//            $teacher_classes = DB::select('
-//                SELECT
-//                    tea_class_from \'class_from\'
-//                    , tea_class_to \'class_to\'
-//                FROM
-//                    teachers
-//                WHERE tea_user_id = "'.$this->teach_id.'"
-//            ');
-//
-//            $subjects = DB::select('
-//                SELECT
-//                    sub_id  \'id\'
-//                    , sub_name \'name\'
-//                FROM
-//                    subject_teachers subtea
-//                LEFT JOIN subjects sub ON  subtea.subtea_subject_id = sub.sub_id
-//                WHERE subtea_teacher_id = ?
-//            ', [$this->teach_id]);
-//
-//            return response()->json($subjects, 200);
-//        }
-
 	}
 
 
