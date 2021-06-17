@@ -1,13 +1,12 @@
 <template>
-    <div data-app>
+    <div data-app class="footer-welcome">
         <v-footer
         :padless="padless"
-        :absolute = true
     >
         <v-card
             flat
             tile
-            class="footer-welcome"
+            class="footer-wrap"
         >
             <v-card-text>
                 <v-btn

@@ -8,14 +8,20 @@
                 color="white"
             ></v-progress-linear>
             <div class="header-items">
-                <div class="block-title">
-                    <div class="main-title">My School</div>
-                    <div class="subtitle">сервіс, що призначений для загальноосвітніх навчальних закладів, щоб покращити якість навчання!</div>
+                <div class="item">
+                    <div class="block-title">
+                        <div class="main-title">Моя Школа</div>
+                        <div class="block-btn">
+                            <button class="login" @click="login_popup = true">Увійти</button>
+                            <div class="register">
+                                Не зареєстровані в системі? <a @click="register_popup = true">Реєстрація</a>
+                            </div>
+                        </div>
+                    </div>
+
+<!--                    <div class="subtitle">сервіс, що призначений для загальноосвітніх навчальних закладів, щоб покращити якість навчання!</div>-->
                 </div>
-                <div class="block-btn">
-                        <v-btn outlined large  rounded @click="register_popup = true">Зареєструвати школу</v-btn>
-                    <v-btn outlined large rounded @click="login_popup = true">Увійти</v-btn>
-                </div>
+
             </div>
             <v-row justify="center" data-app>
                 <v-dialog  v-model="register_popup" max-width="600px">
@@ -74,20 +80,21 @@
                                             <small>*обов'язкові поля для заповнення</small>
                                         </v-col>
                                         <v-col cols="12 text-sm-center">
-                                            <v-btn color="blue darken-1" outlined rounded @click="register()" :loading="active_progress" :disabled="active_progress">Зареєструвати</v-btn>
+                                            <v-btn color="blue darken-1" dark @click="register()" :loading="active_progress">Зареєструвати</v-btn>
                                         </v-col>
                                     </v-row>
                                 </v-container>
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="blue darken-1" text @click="register_popup = false">Закрити</v-btn>
+                                <v-btn color="blue" text @click="register_popup = false">Закрити</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-form>
                 </v-dialog>
                 <v-dialog v-model="login_popup" max-width="400px">
-                    <v-form ref="form1" v-model="valid" lazy-validation>
+                    <v-form ref="form_login" @submit="login()" v-model="valid" method="post" action="login" lazy-validation>
+                        <input type="hidden" name="_token" :value="login_data._token">
                         <v-card>
                             <v-card-title>
                                 <span class="headline">Вхід</span>
@@ -100,7 +107,7 @@
                                                 <h4>Пароль було відправлено на електронну пошту {{ register_data.email }}.</h4>
                                             </div>
                                             <div>
-                                                <v-text-field label="Email" v-model="login_data.email_login" :rules="emailRules" required></v-text-field>
+                                                <v-text-field label="Email" name="email" v-model="login_data.email" :rules="emailRules" required></v-text-field>
                                             </div>
                                             <div>
                                                 <v-text-field
@@ -113,15 +120,15 @@
                                                     @click:append="show_pass = !show_pass"
                                                 ></v-text-field>
                                             </div>
-                                            <div>
-                                                <v-checkbox
-                                                    v-model="login_data.remember"
-                                                    name="remember"
-                                                    label="Запам'ятати"
-                                                ></v-checkbox>
-                                            </div>
+<!--                                            <div>-->
+<!--                                                <v-checkbox-->
+<!--                                                    v-model="login_data.remember"-->
+<!--                                                    name="remember"-->
+<!--                                                    label="Запам'ятати"-->
+<!--                                                ></v-checkbox>-->
+<!--                                            </div>-->
                                             <v-col cols="12 text-sm-center">
-                                                <v-btn color="blue darken-1" outlined rounded @click="login()" :loading="active_progress" :disabled="active_progress">Увійти</v-btn>
+                                                <v-btn color="blue" type="submit" dark :loading="active_progress">Увійти</v-btn>
                                             </v-col>
                                         </v-col>
                                     </v-row>
@@ -141,14 +148,30 @@
             </v-row>
             <v-snackbar
                 v-model="snackbar"
-                color="info"
+                color="success"
                 top
+                :timeout="0"
             >
-                Пароль відправлено на пошту: <u> {{ register_data.email }}</u>
+                <v-icon dark class="mr-3">mdi-email-check</v-icon> Пароль відправлено на пошту: <u> {{ register_data.email }}</u>
                 <v-btn
                     dark
                     text
                     @click="snackbar = false"
+                >
+                    Close
+                </v-btn>
+            </v-snackbar>
+            <v-snackbar
+                v-model="snackbar_error"
+                color="error"
+                top
+                :timeout="0"
+            >
+                <v-icon dark class="mr-3">mdi-alert-rhombus</v-icon> Помилка реєстрації
+                <v-btn
+                    dark
+                    text
+                    @click="snackbar_error = false"
                 >
                     Close
                 </v-btn>
@@ -168,7 +191,7 @@
             snackbar: false,
             show_pass: false,
             notification: false,
-
+            snackbar_error: false,
             schoolNameRules: [
                 v => !!v || "Назва школи обов'язкова",
             ],
@@ -208,9 +231,10 @@
                 region: '',
             }
             , login_data: {
-                email_login: '',
+                email: '',
                 password: '',
                 remember: '',
+                _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
             , errors: {}
         }),
@@ -228,25 +252,27 @@
                 this.validate()
                 try {
                     this.active_progress = true;
-                    await auth.register(this.register_data)
+                    const response = await request('/api/auth/register', 'POST', this.register_data)
                     this.active_progress = false;
-                    this.register_popup = false;
-                    this.login_popup = true;
-                    this.snackbar = true;
-                    this.login_data.email_login = this.register_data.email;
+                    if(response.status_code == 201) {
+                        this.register_popup = false;
+                        this.login_popup = true;
+                        this.snackbar = true;
+                        this.login_data.email = this.register_data.email;
+                    } else {
+                        this.snackbar_error = true
+                    }
+
                 } catch (error) {
                     this.active_progress = false;
                 }
             },
-            async login () {
-                try {
-                    this.active_progress = true;
-                    const response = await auth.login(this.login_data)
-                    location.reload();
-                    this.active_progress = false;
-                } catch (error) {
-                        this.active_progress = false;
-                }
+            login () {
+                this.$refs.form_login.validate()
+                this.active_progress = true
+                setTimeout(() => {
+                    this.active_progress = false
+                }, 1000)
             }
         },
         async mounted() {

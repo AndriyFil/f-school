@@ -1,8 +1,10 @@
 <template>
-    <div data-app>
+    <div class="main" data-app>
         <welcome-header></welcome-header>
-        <welcome-content></welcome-content>
-        <welcome-footer></welcome-footer>
+        <div class="content-footer-block">
+            <welcome-content></welcome-content>
+            <welcome-footer></welcome-footer>
+        </div>
     </div>
 </template>
 
