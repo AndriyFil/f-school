@@ -19,7 +19,7 @@ class CreateSchoolsTable extends Migration
             $table->string('sch_region')->nullable();
             $table->string('sch_city')->nullable();
             $table->timestamp('sch_created')->useCurrent();
-            $table->timestamp('sch_updated')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
+            $table->timestamp('sch_updated')->nullable();
         });
     }
 

@@ -16,8 +16,9 @@ class CreateRatingTypesTable extends Migration
         Schema::create('rating_types', function (Blueprint $table) {
             $table->integer('rattyp_id')->autoIncrement();
             $table->string('rattyp_name')->nullable();
+            $table->integer('rattyp_group')->nullable();
             $table->timestamp('rattyp_created')->useCurrent();
-            $table->timestamp('rattyp_updated')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
+            $table->timestamp('rattyp_updated')->nullable();
         });
     }
 

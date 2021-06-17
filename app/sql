@@ -1,0 +1,634 @@
+
+
+use school
+go
+
+CREATE TABLE administrations (
+  adm_id int,
+  adm_user_id int NOT NULL,
+  adm_type_id int NOT NULL,
+  adm_created date NOT NULL ,
+  adm_updated date NULL
+)
+go
+--
+-- Dumping data for table administrations
+--
+--
+-- Table structure for table cities
+--
+
+CREATE TABLE cities (
+  cit_id int NOT NULL,
+  cit_region_id int NOT NULL,
+  cit_name varchar  NOT NULL
+)
+go
+--
+-- Dumping data for table cities
+-- --------------------------------------------------------
+
+--
+-- Table structure for table classes
+--
+
+CREATE TABLE classes (
+  id int  NOT NULL,
+  number varchar  NOT NULL
+)
+go
+--
+-- Dumping data for table classes
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table curricula
+--
+
+CREATE TABLE curricula (
+  cur_id int NOT NULL,
+  cur_lesson_theme varchar  NOT NULL,
+  cur_study_period_id int NOT NULL,
+  cur_school_id int ,
+  cur_subject_id int NOT NULL,
+  cur_class_number int NOT NULL,
+  cur_created date NOT NULL ,
+  cur_updated date NULL
+)
+go
+--
+-- Dumping data for table curricula
+--
+
+INSERT INTO curricula (cur_id, cur_lesson_theme, cur_study_period_id, cur_school_id, cur_subject_id, cur_class_number, cur_created, cur_updated) VALUES
+(3, 'Раціональні нерівності та їх системи', 1, 26, 1, 9, '2020-05-02 17:55:20', NULL),
+(4, 'Системи рівнянь', 1, 26, 1, 9, '2020-05-02 17:55:20', NULL);
+go
+-- --------------------------------------------------------
+
+--
+-- Table structure for table journals
+--
+
+CREATE TABLE journals (
+  jou_record int NOT NULL,
+  jou_schoolboy_id int NOT NULL,
+  jou_subject_id int NOT NULL,
+  jou_teacher_id int NOT NULL,
+  jou_rating int NOT NULL,
+  jou_rating_type_id int NOT NULL,
+  jou_school_id int NOT NULL,
+  jou_created date NOT NULL,
+  jou_updated date NULL ,
+  jou_theme_id int ,
+  jou_class_number int
+)
+go
+--
+-- Dumping data for table journals
+--
+
+INSERT INTO journals (jou_record, jou_schoolboy_id, jou_subject_id, jou_teacher_id, jou_rating, jou_rating_type_id, jou_school_id, jou_created, jou_updated, jou_theme_id, jou_class_number) VALUES
+(30, 2, 1, 51, 10, 1, 26, '2020-05-20', '2020-05-20 15:42:29', 3, 9),
+(32, 1, 1, 51, 10, 9, 26, '2020-05-24', NULL, 3, 9),
+(33, 1, 1, 51, 8, 1, 26, '2020-05-12', '2020-05-20 16:53:59', 3, 9),
+(34, 1, 1, 51, 10, 2, 26, '2020-05-12', '2020-05-20 16:57:08', 3, 9),
+(35, 1, 1, 51, 10, 5, 26, '2020-05-12', '2020-05-20 16:57:16', 3, 9),
+(36, 1, 1, 51, 10, 1, 26, '2020-05-21', '2020-05-21 15:08:29', 3, 9),
+(44, 2, 1, 51, 11, 4, 26, '2020-05-23', '2020-05-23 10:31:43', 3, 9),
+(46, 3, 1, 51, 10, 1, 26, '2020-05-21', '2020-05-21 20:06:13', 3, 9),
+(47, 1, 1, 51, 12, 2, 26, '2020-05-21', NULL, 3, 9),
+(48, 1, 1, 51, 8, 7, 26, '2020-05-07', '2020-05-21 21:59:21', 3, 9),
+(49, 1, 1, 51, 10, 6, 26, '2020-05-24', NULL, 3, 9),
+(50, 3, 1, 51, 10, 1, 26, '2020-05-22', '2020-05-23 00:09:39', 3, 9),
+(51, 1, 1, 51, 12, 9, 26, '2020-05-22', NULL, 3, 9),
+(53, 3, 1, 51, 11, 4, 26, '2020-05-23', '2020-05-23 00:09:52', 3, 9),
+(56, 2, 1, 51, 8, 1, 26, '2020-05-22', NULL, 4, 9),
+(57, 1, 1, 51, 11, 8, 26, '2020-05-23', NULL, 3, 9),
+(59, 1, 1, 51, 5, 10, 26, '2020-05-23', NULL, 3, 9),
+(60, 1, 1, 51, 2, 9, 26, '2020-05-23', NULL, 3, 9),
+(62, 1, 1, 51, 8, 1, 26, '2020-05-24', NULL, 3, 9),
+(64, 3, 1, 51, 9, 1, 26, '2020-05-23', NULL, 3, 9),
+(65, 1, 1, 51, 7, 2, 26, '2020-05-24', NULL, 3, 9),
+(66, 1, 1, 51, 10, 5, 26, '2020-05-24', NULL, 3, 9),
+(69, 1, 1, 51, 8, 3, 26, '2020-05-18', NULL, 3, 9),
+(70, 2, 1, 51, 11, 3, 26, '2020-05-18', NULL, 3, 9),
+(72, 1, 1, 51, 10, 4, 26, '2020-05-24', NULL, 3, 9),
+(73, 2, 1, 51, 9, 2, 26, '2020-05-24', NULL, 3, 9),
+(76, 3, 1, 51, 9, 1, 26, '2020-05-25', NULL, 3, 9),
+(78, 1, 1, 51, 10, 9, 26, '2020-05-25', NULL, 3, 9),
+(79, 2, 1, 51, 11, 2, 26, '2020-05-25', NULL, 3, 9),
+(80, 1, 1, 51, 11, 10, 26, '2020-05-25', NULL, 3, 9),
+(81, 3, 1, 51, 11, 2, 26, '2020-05-25', NULL, 3, 9),
+(82, 2, 1, 51, 5, 5, 26, '2020-05-25', NULL, 3, 9),
+(85, 1, 1, 51, 10, 1, 26, '2020-05-26', NULL, 3, 9),
+(87, 2, 1, 51, 12, 2, 26, '2020-05-26', NULL, 3, 9),
+(88, 1, 1, 51, 9, 9, 26, '2020-05-26', NULL, 3, 9),
+(90, 3, 1, 51, 10, 2, 26, '2020-05-26', NULL, 3, 9),
+(91, 1, 1, 51, 8, 10, 26, '2020-05-26', NULL, 3, 9),
+(92, 3, 1, 51, 9, 1, 26, '2020-05-26', NULL, 3, 9),
+(93, 2, 1, 51, 8, 10, 26, '2020-05-26', NULL, 3, 9),
+(94, 2, 1, 51, 8, 5, 26, '2020-05-26', NULL, 3, 9),
+(97, 1, 3, 1, 7, 1, 26, '2020-05-26', NULL, 1, 9),
+(98, 1, 4, 1, 9, 1, 26, '2020-05-26', NULL, 5, 9),
+(99, 2, 1, 51, 9, 1, 26, '2020-05-26', NULL, 3, 9),
+(100, 1, 1, 51, 10, 2, 26, '2020-05-26', NULL, 3, 9),
+(101, 3, 1, 51, 11, 5, 26, '2020-05-26', NULL, 3, 9),
+(102, 1, 1, 51, 11, 9, 26, '2020-05-18', NULL, 3, 9),
+(103, 2, 1, 51, 12, 9, 26, '2020-05-18', NULL, 3, 9),
+(104, 2, 1, 51, 9, 1, 26, '2020-05-18', NULL, 3, 9),
+(105, 2, 1, 51, 9, 6, 26, '2020-05-26', NULL, 3, 9),
+(106, 2, 1, 51, 10, 3, 26, '2020-05-26', NULL, 4, 9),
+(107, 1, 1, 51, 11, 1, 26, '2020-05-17', NULL, 3, 9),
+(108, 1, 1, 51, 11, 2, 26, '2020-05-17', NULL, 3, 9),
+(109, 2, 1, 51, 11, 1, 26, '2020-05-17', NULL, 3, 9),
+(110, 2, 1, 51, 11, 2, 26, '2020-05-17', NULL, 3, 9);
+go
+-- --------------------------------------------------------
+
+--
+-- Table structure for table parents
+--
+
+CREATE TABLE parents (
+  par_id int NOT NULL,
+  par_user_id int  NOT NULL,
+  par_created date NOT NULL ,
+  par_updated date NULL
+)
+go
+-- --------------------------------------------------------
+
+--
+-- Table structure for table rating_types
+--
+
+CREATE TABLE rating_types (
+  rattyp_id int NOT NULL,
+  rattyp_name varchar  ,
+  rattyp_created date NOT NULL ,
+  rattyp_updated date NULL ,
+  rattyp_group int NOT NULL
+)
+go
+--
+-- Dumping data for table rating_types
+--
+
+INSERT INTO rating_types (rattyp_id, rattyp_name, rattyp_created, rattyp_updated, rattyp_group) VALUES
+(1, 'Домашнє завдання', '2020-05-02 17:42:18', NULL, 1),
+(2, 'Усна відповідь', '2020-05-02 17:42:18', NULL, 1),
+(3, 'Тематична', '2020-05-02 17:42:47', NULL, 3),
+(4, 'Контрольна робота', '2020-05-02 17:42:47', NULL, 3),
+(5, 'Робота на уроці', '2020-05-02 17:47:48', NULL, 1),
+(6, 'Перший семестр', '2020-05-02 17:47:48', NULL, 3),
+(7, 'Другий семестр', '2020-05-02 17:48:00', NULL, 3),
+(8, 'Річна', '2020-05-02 17:48:00', NULL, 3),
+(9, 'Лабораторна робота', '2020-05-19 15:13:30', NULL, 2),
+(10, 'Самостійна робота', '2020-05-22 13:17:10', NULL, 2);
+go
+-- --------------------------------------------------------
+
+--
+-- Table structure for table regions
+--
+
+CREATE TABLE regions (
+  reg_id int NOT NULL,
+  reg_name varchar  NOT NULL
+)
+go
+--
+-- Dumping data for table regions
+--
+
+INSERT INTO regions (reg_id, reg_name) VALUES
+(1, 'Волинська'),
+(2, 'Київська');
+go
+-- --------------------------------------------------------
+
+--
+-- Table structure for table schoolboys
+--
+
+CREATE TABLE schoolboys (
+  schboy_id int NOT NULL,
+  schboy_ticket varchar  NOT NULL,
+  schboy_firstname varchar(100)  ,
+  schboy_lastname varchar(100)  ,
+  schboy_middlename varchar(100)  ,
+  schboy_class_number int ,
+  schboy_class_letter varchar  ,
+  schboy_user_id int NOT NULL,
+  schboy_created date NOT NULL ,
+  schboy_updated date NULL ,
+  schboy_photo varchar  ,
+  schboy_school_id int
+)
+go
+--
+-- Dumping data for table schoolboys
+--
+
+INSERT INTO schoolboys (schboy_id, schboy_ticket, schboy_firstname, schboy_lastname, schboy_middlename, schboy_class_number, schboy_class_letter, schboy_user_id, schboy_created, schboy_updated, schboy_photo, schboy_school_id) VALUES
+(1, '10', 'Андрій', 'Філоненко', NULL, 9, 'А', 59, '2020-05-02 17:29:14', NULL, 'img/user/elon-musk.png', 26),
+(2, '11', 'Артем', 'Гек', NULL, 9, 'А', 60, '2020-05-02 17:29:14', NULL, 'img/user/elon-musk.png', 26),
+(3, '12', 'Ольга', 'Глен', NULL, 9, 'А', 67, '2020-05-02 18:35:58', NULL, 'img/user/profile2.png', 26);
+go
+-- --------------------------------------------------------
+
+--
+-- Table structure for table schoolboys_parents
+--
+
+CREATE TABLE schoolboys_parents (
+  parent_id int NOT NULL,
+  schoolboy_id int NOT NULL
+)
+go
+--
+-- Dumping data for table schoolboys_parents
+--
+
+INSERT INTO schoolboys_parents (parent_id, schoolboy_id) VALUES
+(65, 1),
+(65, 2);
+go
+-- --------------------------------------------------------
+
+--
+-- Table structure for table schools
+--
+
+CREATE TABLE schools (
+  sch_id int NOT NULL,
+  sch_name varchar  ,
+  sch_region varchar  ,
+  sch_city varchar  ,
+  sch_created date NOT NULL ,
+  sch_updated date NULL
+)
+go
+--
+-- Dumping data for table schools
+--
+
+INSERT INTO schools (sch_id, sch_name, sch_region, sch_city, sch_created, sch_updated) VALUES
+(3, 'My School', '1', '1', '2020-04-26 18:15:20', '2020-04-26 18:15:20'),
+(4, 'My School', '1', '1', '2020-04-27 10:20:53', '2020-04-27 10:20:53'),
+(5, 'My School', '1', '1', '2020-04-27 10:21:37', '2020-04-27 10:21:37'),
+(6, 'My School', '1', '1', '2020-04-27 10:29:03', '2020-04-27 10:29:03'),
+(7, 'My School', '1', '1', '2020-04-27 10:50:32', '2020-04-27 10:50:32'),
+(8, 'VY', '1', '1', '2020-05-01 11:25:57', '2020-05-01 11:25:57'),
+(14, 'GGG', '1', '1', '2020-05-01 11:55:37', '2020-05-01 11:55:37'),
+(15, '1', '1', '1', '2020-05-01 12:04:00', '2020-05-01 12:04:00'),
+(17, '1', '1', '1', '2020-05-01 12:05:56', '2020-05-01 12:05:56'),
+(18, 'Last', '1', '1', '2020-05-01 13:18:21', '2020-05-01 13:18:21'),
+(25, 'Моя школа', '1', '1', '2020-05-01 14:19:28', '2020-05-01 14:19:28'),
+(26, 'Best school ever', '1', '1', '2020-05-01 15:35:51', '2020-05-01 15:35:51'),
+(27, '2', '1', '1', '2020-05-01 20:17:57', '2020-05-01 20:17:57'),
+(28, 'Моя школа', '1', '1', '2020-05-04 07:44:42', '2020-05-04 07:44:42'),
+(29, 'Моя школа', '1', '1', '2020-05-04 07:44:42', '2020-05-04 07:44:42'),
+(30, '1', '1', '1', '2020-05-21 11:56:58', '2020-05-21 11:56:58'),
+(31, '1', '1', '1', '2020-05-21 11:56:59', '2020-05-21 11:56:59'),
+(34, '5', '1', '1', '2020-05-21 12:13:49', '2020-05-21 12:13:49'),
+(35, '5', '1', '1', '2020-05-21 12:14:16', '2020-05-21 12:14:16'),
+(40, '5', '1', '1', '2020-05-21 12:16:23', '2020-05-21 12:16:23'),
+(41, '5', '1', '1', '2020-05-21 12:17:46', '2020-05-21 12:17:46'),
+(42, '5', '1', '1', '2020-05-21 12:22:08', '2020-05-21 12:22:08'),
+(43, '8', '1', '1', '2020-05-21 12:22:46', '2020-05-21 12:22:46'),
+(44, '8', '1', '1', '2020-05-21 12:22:46', '2020-05-21 12:22:46'),
+(45, '12', '1', '1', '2020-05-21 12:31:52', '2020-05-21 12:31:52'),
+(46, '12', '1', '1', '2020-05-21 12:31:52', '2020-05-21 12:31:52'),
+(47, '99', '1', '2', '2020-05-21 12:33:48', '2020-05-21 12:33:48'),
+(48, '99', '1', '2', '2020-05-21 12:33:48', '2020-05-21 12:33:48'),
+(49, '321', '1', '1', '2020-05-21 12:46:41', '2020-05-21 12:46:41'),
+(50, '321', '1', '1', '2020-05-21 12:46:41', '2020-05-21 12:46:41'),
+(51, '12', '1', '1', '2020-05-21 12:47:20', '2020-05-21 12:47:20'),
+(52, '12', '1', '1', '2020-05-21 12:47:20', '2020-05-21 12:47:20'),
+(53, '666', '1', '2', '2020-05-21 12:57:48', '2020-05-21 12:57:48'),
+(54, '666', '1', '2', '2020-05-21 12:57:48', '2020-05-21 12:57:48'),
+(55, '32567', '1', '1', '2020-05-22 16:31:58', '2020-05-22 16:31:58'),
+(56, 'ЗОШ №10', '1', '1', '2020-05-22 16:33:53', '2020-05-22 16:33:53'),
+(57, '888', '1', '1', '2020-05-24 19:17:24', '2020-05-24 19:17:24'),
+(58, 'shkola10', '1', '1', '2020-05-25 16:54:36', '2020-05-25 16:54:36'),
+(59, 'Django School', '1', '2', '2020-05-26 05:08:28', '2020-05-26 05:08:28'),
+(60, '1', '1', '1', '2020-05-26 05:30:15', '2020-05-26 05:30:15'),
+(61, 'ЗОШ №10', '1', '1', '2020-05-26 05:50:06', '2020-05-26 05:50:06');
+go
+-- --------------------------------------------------------
+
+--
+-- Table structure for table study_periods
+--
+
+CREATE TABLE study_periods (
+  stuper_id int NOT NULL,
+  stuper_name varchar  NOT NULL
+)
+go
+--
+-- Dumping data for table study_periods
+--
+
+INSERT INTO study_periods (stuper_id, stuper_name) VALUES
+(1, 'Перший семестр'),
+(2, 'Другий семестр');
+go
+-- --------------------------------------------------------
+
+--
+-- Table structure for table study_periods_schools
+--
+
+CREATE TABLE study_periods_schools (
+  stupersch_id int NOT NULL,
+  stupersch_date_from varchar(10)  ,
+  stupersch_date_to varchar(10)  ,
+  stupersch_active int
+)
+go
+--
+-- Dumping data for table study_periods_schools
+--
+
+INSERT INTO study_periods_schools (stupersch_id, stupersch_date_from, stupersch_date_to, stupersch_active) VALUES
+(1, '2019', '2020', 1);
+go
+-- --------------------------------------------------------
+
+--
+-- Table structure for table subjects
+--
+
+CREATE TABLE subjects (
+  sub_id int NOT NULL,
+  sub_name varchar  ,
+  school_id int ,
+  sub_created date NOT NULL ,
+  sub_updated date NULL
+)
+go
+--
+-- Dumping data for table subjects
+--
+go
+INSERT INTO subjects (sub_id, sub_name, school_id, sub_created, sub_updated) VALUES
+(1, 'Алгебра', NULL, '2020-05-02 17:36:12', NULL),
+(2, 'Геометрія', NULL, '2020-05-02 17:36:12', NULL),
+(3, 'Історія України', NULL, '2020-05-23 17:24:02', NULL),
+(4, 'Хімія', NULL, '2020-05-23 17:24:02', NULL),
+(5, 'Фізика', NULL, '2020-05-23 17:24:02', NULL),
+(6, 'Географія', NULL, '2020-05-23 17:24:02', NULL),
+(7, 'Українська мова', NULL, '2020-05-23 17:24:02', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table subjects_classes
+--
+
+CREATE TABLE subjects_classes (
+  subject_id int NOT NULL,
+  class_number int NOT NULL
+)
+go
+--
+-- Dumping data for table subjects_classes
+--
+
+INSERT INTO subjects_classes (subject_id, class_number) VALUES
+(1, 9),
+(2, 9),
+(3, 9),
+(4, 8),
+(4, 9),
+(5, 1),
+(5, 9),
+(6, 8),
+(6, 9),
+(7, 8),
+(7, 9);
+go
+-- --------------------------------------------------------
+
+--
+-- Table structure for table subject_teachers
+--
+
+CREATE TABLE subject_teachers (
+  subtea_teacher_id int NOT NULL,
+  subtea_subject_id int NOT NULL
+)
+go
+--
+-- Dumping data for table subject_teachers
+--
+
+INSERT INTO subject_teachers (subtea_teacher_id, subtea_subject_id) VALUES
+(25, 1),
+(25, 2);
+go
+-- --------------------------------------------------------
+
+--
+-- Table structure for table teachers
+--
+
+CREATE TABLE teachers (
+  tea_id int NOT NULL,
+  tea_user_id int  NOT NULL,
+  tea_class_from int ,
+  tea_class_to int ,
+  tea_class_number int ,
+  tea_class_letter varchar(1)  ,
+  tea_type_id int NOT NULL,
+  tea_created date NOT NULL ,
+  tea_updated date NULL ,
+  tea_photo varchar
+)
+go
+--
+-- Dumping data for table teachers
+--
+
+INSERT INTO teachers (tea_id, tea_user_id, tea_class_from, tea_class_to, tea_class_number, tea_class_letter, tea_type_id, tea_created, tea_updated, tea_photo) VALUES
+(25, '51', 5, 9, 9, 'А', 1, '2020-05-02 23:08:08', NULL, 'img/user/elon-musk.png');
+go
+-- --------------------------------------------------------
+
+--
+-- Table structure for table users
+--
+
+CREATE TABLE users (
+  id int  NOT NULL,
+  firstname varchar(100)  ,
+  lastname varchar(100)  ,
+  middlename varchar(100)  ,
+  photo varchar  ,
+  phone_number varchar(15)  ,
+  school_id int ,
+  email varchar(100)  NOT NULL,
+  email_verified_at date NULL ,
+  password varchar  NOT NULL,
+  remember_token varchar(100)  ,
+  created_at date NULL ,
+  updated_at date NULL ,
+  role varchar  NOT NULL DEFAULT 'admin'
+)
+go
+--
+-- Dumping data for table users
+--
+
+INSERT INTO users (id, firstname, lastname, middlename, photo, phone_number, school_id, email, email_verified_at, password, remember_token, created_at, updated_at, role) VALUES
+(17, NULL, NULL, NULL, NULL, NULL, NULL, 'me@gmail.com', NULL, '$2y$10$MR64CL93EM04zVxf.e00BePM6wSd5gEgdJxe64LClRVhS2MrCiKwC', NULL, '2020-04-26 15:53:34', '2020-04-26 15:53:34', 'admin'),
+(24, NULL, NULL, NULL, NULL, NULL, NULL, 'filonenkoandriysarmat1@gmail.com', NULL, '$2y$10$JswAlKQqqgQpgZIGqIwUhesc0M.vHLGP6yi6v0fPwTaNfUY/hw42C', NULL, '2020-04-27 10:20:52', '2020-04-27 10:20:52', 'admin'),
+(26, NULL, NULL, NULL, NULL, NULL, NULL, 'sarmatfil1@gmail.com', NULL, '$2y$10$tohJyDEh2ZjW8EUyEnXA8.rdYrcrpXy23cQ5EFJnEw7su1PaBsBki', NULL, '2020-04-27 10:29:03', '2020-04-27 10:29:03', 'admin'),
+(27, NULL, NULL, NULL, NULL, NULL, NULL, 'sarmatfil3@gmail.com', NULL, '$2y$10$HxD1PKK63n.6eqxeOPXAkun0tdy5Ve2lJnQcfSFF8aSF9T2jkYWuO', NULL, '2020-04-27 10:50:31', '2020-04-27 10:50:31', 'admin'),
+(28, NULL, NULL, NULL, NULL, NULL, NULL, '1@gmail.com', NULL, '$2y$10$/83RVCadp94JoQ0xc0nI5e0ALMtjQrtGHdVFaIXVKitSIQU9fJfnO', NULL, '2020-04-27 10:56:36', '2020-04-27 10:56:36', 'admin'),
+(31, NULL, NULL, NULL, NULL, NULL, NULL, '2@gmail.com', NULL, '$2y$10$wonsLyJf8bknJKBJYlmjiOXWkVPmO3.5dwmLBQuQWUJ4aFOxbk35a', NULL, '2020-04-28 12:34:12', '2020-04-28 12:34:12', 'teacher'),
+(32, NULL, NULL, NULL, NULL, NULL, NULL, '3@gmail.com', NULL, '$2y$10$IujkbTROH17lgJwheCtfx.1OUij98yUi0n90Z/732HT6I2F99phgu', NULL, '2020-04-28 19:21:54', '2020-04-28 19:21:54', 'admin'),
+(33, NULL, NULL, NULL, NULL, NULL, NULL, 'ar111@gmail.com', NULL, '$2y$10$gfFe6AXubBcGN9rLbFNxh.sG39HynpiHdUiph44P9K0Z6ST9toNLq', NULL, '2020-05-01 11:25:57', '2020-05-01 11:25:57', 'admin'),
+(39, NULL, NULL, NULL, NULL, NULL, NULL, 'filonenkoandriysarmat5@gmail.com', NULL, '$2y$10$kDVFRweGnXAatlwSIeYfLu4Hc1ytO4Os8N717ajCfKG7tt9tP9l0O', NULL, '2020-05-01 11:55:37', '2020-05-01 11:55:37', 'admin'),
+(42, NULL, NULL, NULL, NULL, NULL, NULL, '8@j.com', NULL, '$2y$10$T63LoqBX95VmEYD/XH.gy.PJgpVJMnKYzrbrd2noL9dASaE1htRui', NULL, '2020-05-01 12:05:56', '2020-05-01 12:05:56', 'admin'),
+(43, NULL, NULL, NULL, NULL, NULL, NULL, 'filonenkoandriysarmat11@gmail.com', NULL, '$2y$10$0uEGaiLnnWgiyuSvSn3ccOGNQ7ZtHiIkJNtxvKGP3S7SUy8TUvFuG', NULL, '2020-05-01 13:18:21', '2020-05-01 13:18:21', 'admin'),
+(50, NULL, NULL, NULL, NULL, NULL, NULL, 'filonenkoandriysarmat133@gmail.com', NULL, '$2y$10$UIddPejsH06WZMcJybCKjuLEjAKJxVmOkb56FYPIofNHgEmWTuozC', NULL, '2020-05-01 14:19:28', '2020-05-01 14:19:28', 'admin'),
+(51, 'Андрій', 'Філоненко', 'Юрійович', '/img/user/elon-musk.png', '+380685620040', 26, 'filonenkoandriysarmat@gmail.com', NULL, '$2y$10$ZFSfEAW.e8jz6IwExzlA3OWlAlceWk9evwyAjtsu0c7VOZZlLYy62', NULL, '2020-05-01 15:35:51', '2020-05-01 15:35:51', 'teacher'),
+(52, NULL, NULL, NULL, NULL, NULL, NULL, '8@gmail.com', NULL, '$2y$10$DKN08Bbwzv0QCH8dfCoG0.a/uUsAcOrOxHcDXyg4uRFp6zjleFBjm', NULL, '2020-05-01 20:17:57', '2020-05-01 20:17:57', 'admin'),
+(53, 'Адрій', 'Філоненко', 'Юрійович', 'img/user/elon-musk.png', '+306856200440', NULL, '10@gmail.com', NULL, '$2y$10$Ypx2IgoXlDkqJ4Qe9jwXx.UT.rDRaBRzEV.9b2d6u.UgsqNP0csyK', NULL, '2020-05-04 07:44:42', '2020-05-04 07:44:42', 'admin'),
+(54, '1', '1', '2', 'img/user/elon-musk.png', '3', NULL, '3333@1.bb', NULL, '$2y$10$D2fuLiFIun1JIiZEEZHNMepcsCwAu/jE4YlL77lIMPz7sN5jttFVC', NULL, '2020-05-21 11:56:59', '2020-05-21 11:56:59', 'admin'),
+(55, '543', '12', '21', 'img/user/elon-musk.png', '32', NULL, '3232999235@f.bb', NULL, '$2y$10$UELPfPmI/aKVsohTElFk9emgmgjBeparfq/qwE.KoVfiqIwQ1Jkfa', NULL, '2020-05-21 12:17:46', '2020-05-21 12:17:46', 'admin'),
+(56, '543', '12', '21', 'img/user/elon-musk.png', '32', NULL, '32329992222235@f.bb', NULL, '$2y$10$xD04o/QetiZm7tH.uJjEYeGAaE3VNbj0jPEdMLX.YXf3uCntIp7im', NULL, '2020-05-21 12:22:08', '2020-05-21 12:22:08', 'admin'),
+(57, '3', '4', '43', 'img/user/elon-musk.png', '3', NULL, '666679@r.vv', NULL, '$2y$10$90MjMKLvqxSqOmlPYSSaLeCD8E6.uH0NoKDpUASNZVRMZBK0mgQfW', NULL, '2020-05-21 12:22:46', '2020-05-21 12:22:46', 'admin'),
+(58, '33', '33', '333', 'img/user/elon-musk.png', '+380685620040', NULL, '675@1.om', NULL, '$2y$10$eOH2pKUDG1FZjK5fmt6DsOJ1bolCCBoBHiQMNcInXqPEqk2um0Wgm', NULL, '2020-05-21 12:31:52', '2020-05-21 12:31:52', 'admin'),
+(59, '99', '0', '9', 'img/user/elon-musk.png', '+3806457849', NULL, '56789@gmail.com', NULL, '$2y$10$.cVKRnHVU7uGEk/co6G0lOAc8.CCKm8AkVotTqDBb579U62F2pNL2', NULL, '2020-05-21 12:33:48', '2020-05-21 12:33:48', 'admin'),
+(60, '3', '3', '1', 'img/user/elon-musk.png', '222', NULL, '67898765@g.com', NULL, '$2y$10$UyAH14f.8RP4F0TRqOIV9ugy.sGYJ2Cla2EC0y/Z1Bg.lhOCyhwfS', NULL, '2020-05-21 12:46:41', '2020-05-21 12:46:41', 'admin'),
+(61, '23', '32', '2', 'img/user/elon-musk.png', '2', NULL, '231354532235@j.ccc', NULL, '$2y$10$m0gfOIBzaePqqDYlWEv7IORcvsszYi9o8Vb8MpeZx6CUVwxLsJT3C', NULL, '2020-05-21 12:47:20', '2020-05-21 12:47:20', 'admin'),
+(62, '7890', '5', NULL, 'img/user/elon-musk.png', '123', NULL, '7897665432@g.iki', NULL, '$2y$10$xSyqYZedkYyvODRRz6730.ddrAMUyTyLcd6QB9EokVxg5OFMFRdei', NULL, '2020-05-21 12:57:48', '2020-05-21 12:57:48', 'admin'),
+(63, '1', '2', '3', 'img/user/elon-musk.png', '4', NULL, 'kkkkkkk@gmail.com', NULL, '$2y$10$Zqtwn0TOhjlIcVTjk7dQp.5WmXqO3FzGF09VZuL0DV53uryuJSCPu', NULL, '2020-05-22 16:31:58', '2020-05-22 16:31:58', 'admin'),
+(64, 'Богдан', 'Філоненко', 'Юрійович', 'img/user/elon-musk.png', '+380980161863', NULL, 'shkola10@myshkola.ddns.net', NULL, '1', NULL, '2020-05-22 16:33:53', '2020-05-22 16:33:53', 'admin'),
+(65, 'Петро', 'Гек', 'Васильович', 'img/user/elon-musk.png', '+380659265988', NULL, '777@gg.com', NULL, '$2y$10$qvdD0z3LBMLNHso9bfUBaORWBi7uEpEIZBLkFgcwWi5ltjdLptWOO', NULL, '2020-05-24 19:17:24', '2020-05-24 19:17:24', 'parent'),
+(66, 'Богдан', 'Філоненко', 'Юрійович', 'img/user/elon-musk.png', '+380980161863', NULL, 'workhasp@gmail.com', NULL, '$2y$10$tkzPPxCa4U5K7zRJUp7qSuV3BL0mn2mdcVZa.I7zw42ku6alws07m', NULL, '2020-05-25 16:54:36', '2020-05-25 16:54:36', 'admin'),
+(67, 'Дмитро', 'Шевченко', 'Віталійович', 'img/user/elon-musk.png', '0380685350490', NULL, 'shevchenkodim@rambler.ru', NULL, '$2y$10$XJdxyKjVLwhsIeKWfGGbd.tThkAWQnnUL.4dbrZN6mUij/NZx60Q6', NULL, '2020-05-26 05:08:28', '2020-05-26 05:08:28', 'admin'),
+(69, 'Андрій', 'Філоненко', 'Юрійович', 'img/user/elon-musk.png', '+380685620040', NULL, 'sarmatfil@gmail.com', NULL, '$2y$10$oQFHcIhoM.sp3HwBQlhb3usJpn23FkGLhvfBOyqT0zq3NS0VUcRxS', NULL, '2020-05-26 05:50:07', '2020-05-26 05:50:07', 'admin');
+go
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table administrations
+--
+ALTER TABLE administrations
+  ADD PRIMARY KEY (adm_id)
+go
+ALTER TABLE cities
+  ADD PRIMARY KEY (cit_id);
+go
+--
+-- Indexes for table classes
+--
+ALTER TABLE classes
+  ADD PRIMARY KEY (id);
+go
+--
+-- Indexes for table curricula
+--
+ALTER TABLE curricula
+  ADD PRIMARY KEY (cur_id)
+go
+--
+-- Indexes for table journals
+--
+ALTER TABLE journals
+  ADD PRIMARY KEY (jou_record)
+go
+--
+-- Indexes for table parents
+--
+ALTER TABLE parents
+  ADD PRIMARY KEY (par_id)
+go
+--
+-- Indexes for table rating_types
+--
+ALTER TABLE rating_types
+  ADD PRIMARY KEY (rattyp_id);
+go
+--
+-- Indexes for table regions
+--
+ALTER TABLE regions
+  ADD PRIMARY KEY (reg_id);
+go
+--
+-- Indexes for table schoolboys
+--
+ALTER TABLE schoolboys
+  ADD PRIMARY KEY (schboy_id)
+  go
+
+--
+-- Indexes for table schoolboys_parents
+--
+ALTER TABLE schoolboys_parents
+  ADD PRIMARY KEY (parent_id,schoolboy_id);
+go
+--
+-- Indexes for table schools
+--
+ALTER TABLE schools
+  ADD PRIMARY KEY (sch_id);
+go
+--
+-- Indexes for table study_periods
+--
+ALTER TABLE study_periods
+  ADD PRIMARY KEY (stuper_id);
+go
+--
+-- Indexes for table study_periods_schools
+--
+ALTER TABLE study_periods_schools
+  ADD PRIMARY KEY (stupersch_id);
+go
+--
+-- Indexes for table subjects
+--
+ALTER TABLE subjects
+  ADD PRIMARY KEY (sub_id);
+go
+--
+-- Indexes for table subjects_classes
+--
+ALTER TABLE subjects_classes
+  ADD PRIMARY KEY (subject_id,class_number);
+go
+--
+-- Indexes for table subject_teachers
+--
+ALTER TABLE subject_teachers
+  ADD PRIMARY KEY (subtea_teacher_id,subtea_subject_id);
+go
+--
+-- Indexes for table teachers
+--
+ALTER TABLE teachers
+  ADD PRIMARY KEY (tea_id)
+go
+
+--
+-- Indexes for table users
+--
+ALTER TABLE users
+  ADD PRIMARY KEY (id)
+go
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -26,6 +26,8 @@ import calendar from "./calendar";
 
 import App from "./components/App";
 import Welcome from "./components/Welcome";
+import Navbar from "./components/user/Navbar";
+import Diary from "./components/user/Diary";
 import store from "./store";
 
 import * as auth from './services/auth_service.js'
@@ -49,6 +51,11 @@ new Vue({
     , calendar
     // , render: route
     , components: {
-        'content-app': route
+        // 'content-app': route
+        // 'content-app': route
+        'welcome-app': Welcome,
+        'user-navbar': Navbar,
+        'parent-view': Diary,
+        'user-app': App
     }
 });

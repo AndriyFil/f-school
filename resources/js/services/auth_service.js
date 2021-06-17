@@ -6,7 +6,7 @@ export function register(user) {
     return http.http().post('/auth/register', user);
 }
 export function login(user) {
-    return http.http().post('/auth/login', user)
+    return http.http().post('/login', user)
         .then(response => {
             if(response.status === 200) {
                 setToken(response.data)

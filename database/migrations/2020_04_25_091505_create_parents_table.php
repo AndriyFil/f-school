@@ -22,7 +22,7 @@ class CreateParentsTable extends Migration
 //            $table->string('par_email')->unique();
             $table->string('par_user_id')->index();
             $table->timestamp('par_created')->useCurrent();
-            $table->timestamp('par_updated')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
+            $table->timestamp('par_updated')->nullable();
         });
     }
 

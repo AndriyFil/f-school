@@ -20,7 +20,7 @@ class CreateAdministrationsTable extends Migration
             $table->integer('adm_type_id')->index();
 
             $table->timestamp('adm_created')->useCurrent();
-            $table->timestamp('adm_updated')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
+            $table->timestamp('adm_updated')->nullable();
         });
     }
 

@@ -21,10 +21,10 @@ use Illuminate\Support\Facades\Route;
 
 
     //first try with authorization
-    Route::post('login', 'UserController@login');
-    Route::post('register', 'UserController@register');
-    Route::post('refreshtoken', 'UserController@refreshToken');
-    Route::get('/unauthorized', 'UserController@unauthorized');
+//    Route::post('login', 'UserController@login');
+//    Route::post('register', 'UserController@register');
+//    Route::post('refreshtoken', 'UserController@refreshToken');
+//    Route::get('/unauthorized', 'UserController@unauthorized');
 
     Route::group(['middleware' => ['CheckClientCredentials','auth:api']], function() {
         Route::post('logout', 'UserController@logout');
@@ -59,11 +59,16 @@ use Illuminate\Support\Facades\Route;
          });
    });
 
-//    Route::group(['middleware' => 'auth:api'], function() {
-        Route::get('subjects_classes/{id}/{school_id}/{role}', 'JournalController@getSubjectsClasses');
-        Route::get('sections/{subject_id}/{class_number}/{school_id}', 'JournalController@getThemes');
+        Route::get('/subjects_classes', 'JournalController@getSubjectsClasses');
+        Route::get('sections/{subject_id}/{class_number}', 'JournalController@getThemes');
         Route::post('/schoolboys', 'JournalController@getSchoolboys');
+        Route::post('/journal', 'MyClassController@getSchoolboys');
         Route::post('/set_rating', 'JournalController@setRating');
-//    });
+        Route::post('/get_lesson', 'JournalController@getLessonTable');
+//        Route::post('/test', 'JournalController@test');
+
+        // parents
+        Route::post('/filters', 'ParentController@getFilters');
+        Route::post('/diary', 'ParentController@getSchoolboys');
 //    Route::get('classes', 'JournalController@getClasses');
 

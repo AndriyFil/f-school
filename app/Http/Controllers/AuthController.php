@@ -54,11 +54,6 @@
                 $user->school_id = $school->sch_id;
                 $user->password = bcrypt($password);
                 $user->save();
-                $school = new School;
-                $school->sch_name = $request->school_name;
-                $school->sch_city = $request->city;
-                $school->sch_region = $request->region;
-                $school->save();
                 $admin = new Administration;
                 $admin->adm_user_id = $user->id;
                 $admin->adm_type_id = '1';

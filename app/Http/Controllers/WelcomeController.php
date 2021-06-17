@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\City;
 use App\Region;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WelcomeController extends Controller
 {
     public function index()
     {
+        $subjects = ['id' => -1, 'name' => 'Немає даних'];
+        $classes = ['id' => -1, 'name' => 'Немає даних'];
+//        dd(Auth::user()->id);
         return view('welcome');
     }
 

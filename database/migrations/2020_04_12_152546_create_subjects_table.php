@@ -17,7 +17,7 @@ class CreateSubjectsTable extends Migration
             $table->integer('sub_id')->autoIncrement();
             $table->string('sub_name')->nullable();
             $table->timestamp('sub_created')->useCurrent();
-            $table->timestamp('sub_updated')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
+            $table->timestamp('sub_updated')->nullable();
         });
     }
 

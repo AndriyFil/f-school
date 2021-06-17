@@ -10,16 +10,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 class EmailController extends Controller
 {
+    public $email = "";
     public function sendEmail($email = "filonenkoandriysarmat@gmail.com", $text = "AAA")
     {
         $data['title'] = "Ваш пароль: ";
         $data['text'] = $text;
-
+        $this->email = $email;
         Mail::send('emails.email', $data, function($message) {
 
-            $message->to('filonenkoandriysarmat@gmail.com', 'AAAA')
+            $message->to($this->email, 'Реєстрація')
 
-                ->subject('Вітаємо з реєстрацією в School');
+                ->subject('Вітаємо з реєстрацією в системі "Моя Школа" ');
         });
 
         if (Mail::failures()) {

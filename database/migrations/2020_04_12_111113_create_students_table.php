@@ -27,7 +27,7 @@ class CreateStudentsTable extends Migration
 //            $table->integer('schboy_school_id')->index();
 //            $table->string('schboy_photo');
             $table->timestamp('schboy_created')->useCurrent();
-            $table->timestamp('schboy_updated')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
+            $table->timestamp('schboy_updated')->nullable();
         });
     }
 

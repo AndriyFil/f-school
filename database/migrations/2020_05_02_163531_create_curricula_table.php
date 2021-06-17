@@ -21,7 +21,7 @@ class CreateCurriculaTable extends Migration
             $table->integer('stuper_subject_id')->index();
             $table->integer('stuper_class_number')->index();
             $table->timestamp('stuper_created')->useCurrent();
-            $table->timestamp('stuper_updated')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
+            $table->timestamp('stuper_updated')->nullable();
         });
     }
 

@@ -29,7 +29,7 @@ class CreateTeachersTable extends Migration
 //            $table->string('tea_photo');
 //            $table->integer('tea_school_id')->index();
             $table->timestamp('tea_created')->useCurrent();
-            $table->timestamp('tea_updated')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
+            $table->timestamp('tea_updated')->nullable();
         });
     }
 

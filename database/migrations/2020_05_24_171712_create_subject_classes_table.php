@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-    use Illuminate\Support\Facades\DB;
-class CreateStudyPeriodsTable extends Migration
+
+class CreateSubjectClassesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateStudyPeriodsTable extends Migration
      */
     public function up()
     {
-        Schema::create('study_periods', function (Blueprint $table) {
-            $table->integer('stuper_id')->autoIncrement();
-            $table->string('stuper_name');
+        Schema::create('subject_classes', function (Blueprint $table) {
+            $table->id();
+            $table->integer('subject_id');
+            $table->integer('class_id');
         });
     }
 
@@ -26,6 +27,6 @@ class CreateStudyPeriodsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('study_periods');
+        Schema::dropIfExists('subject_classes');
     }
 }

@@ -23,7 +23,7 @@ class CreateJournalTable extends Migration
             $table->integer('jou_school_id')->index();
             $table->integer('jou_theme_id')->index();
             $table->timestamp('jou_created')->useCurrent();
-            $table->timestamp('jou_updated')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
+            $table->timestamp('jou_updated')->nullable();
         });
     }
 

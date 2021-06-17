@@ -6,27 +6,28 @@ import VueRouter from 'vue-router';
 
 import Journal from "./components/user/Journal";
 import Lesson from "./components/user/Lesson";
+import Diary from "./components/user/Diary";
 import * as auth from './services/auth_service.js'
 import Welcome from "./components/Welcome";
 import App from "./components/App";
+import MyClass from "./components/user/MyClass";
 Vue.use(VueRouter)
 var routes = [];
-if(!auth.isLoggedIn()) {
-    routes = []
-    } else {
-        routes = [
-            {
-                path: '/journal'
-                , component: Journal
-                , name: 'journal'
-            }
-            , {
-                path: '/journal/lesson'
-                , component: Lesson
-                , name: 'lesson'
-            }
-        ]
+
+
+routes = [
+    {
+        path: '/journal'
+        , component: Journal
+        , name: 'journal'
     }
+    , {
+        path: '/my_class'
+        , component: MyClass
+        , name: 'MyClass'
+    }
+]
+
 export default new VueRouter({
     mode: 'history'
     , routes
